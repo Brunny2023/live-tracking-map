@@ -44,6 +44,10 @@
         } else {
             alert("Geolocation is not supported by this browser.");
         }
+        // Ensure map fully loads inside WebView
+setTimeout(() => {
+    map.invalidateSize();
+}, 500);
     </script>
 
 </body>
