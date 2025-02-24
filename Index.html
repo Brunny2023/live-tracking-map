@@ -6,9 +6,6 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Live Tracking Map</title>
     
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    
     <style>
         body, html {
             margin: 0;
@@ -19,7 +16,7 @@
         }
         #map {
             width: 100%;
-            height: 100vh; /* Full height */
+            height: 100vh;
         }
     </style>
 </head>
@@ -27,62 +24,14 @@
 
     <h1 style="text-align: center;">Live Tracking Map</h1>
 
-    <!-- Embed Netlify Hosted Map -->
+    <!-- Always Use Netlify Version -->
     <iframe 
         id="netlifyMap"
         src="https://lizyclub.netlify.app"
         width="100%"
-        height="500px"
-        style="border: none; display: none;">
+        height="100%"
+        style="border: none; display: block;">
     </iframe>
-
-    <!-- Original OpenStreetMap Display -->
-    <div id="map"></div>
-
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Initialize Leaflet Map
-            var map = L.map('map').setView([0, 0], 13);
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors'
-            }).addTo(map);
-
-            var marker = L.marker([0, 0]).addTo(map);
-
-            // Update User Location
-            function updateLocation(position) {
-                var lat = position.coords.latitude;
-                var lng = position.coords.longitude;
-                marker.setLatLng([lat, lng]);
-                map.setView([lat, lng], 13);
-            }
-
-            // Handle Location Errors
-            function errorHandler(error) {
-                console.log("Error getting location: ", error);
-            }
-
-            // Get User Location
-            if (navigator.geolocation) {
-                navigator.geolocation.watchPosition(updateLocation, errorHandler, { enableHighAccuracy: true });
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
-
-            // Attempt to Load Netlify Version If WebView Blocks OpenStreetMap
-            setTimeout(function () {
-                var iframe = document.getElementById("netlifyMap");
-                if (iframe && !map.hasLayer(marker)) {
-                    document.getElementById("map").style.display = "none";
-                    iframe.style.display = "block";
-                }
-            }, 3000);
-        });
-    </script>
 
 </body>
 </html>
