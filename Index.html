@@ -50,10 +50,28 @@
             color: red;
             padding-top: 20px;
         }
-    </style>
+
+/* AUTOREFINE_UI_ACCESSIBILITY_START */
+:where(a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* AUTOREFINE_UI_ACCESSIBILITY_END */
+</style>
 </head>
 <body onload="requestLocation()">
     <p id="status">Requesting Location...</p>
     <iframe id="mapFrame" allow="geolocation"></iframe>
+<!-- AUTOREFINE:CHATBOT:MOUNT:START -->
+<script src="./autorefine-chatbot.js" data-project-id="4ccd1a4d-be1c-4a2b-9b21-79631f7ad066" data-autorefine-chatbot="true" defer></script>
+<!-- AUTOREFINE:CHATBOT:MOUNT:END -->
 </body>
 </html>
